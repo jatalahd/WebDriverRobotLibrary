@@ -1,0 +1,78 @@
+*** Settings ***
+Library		WebDriverRobotLibrary
+SuiteSetup	SuiteSetupTasks
+SuiteTeardown	SuiteTeardownTasks
+TestSetup	TestSetupTasks
+TestTeardown	TestTeardownTasks
+
+
+*** Variables ***
+# SET THIS VARIABLE TO POINT TO THE LOCATION OF THE FILE IN YOUR PC!
+${TEST_URL}=	file:///C:/Users/user/Desktop/testpage.html
+
+
+*** Keywords ***
+SuiteSetupTasks
+	OpenBrowser	firefox
+	SetBrowserWindowSize	800	600
+
+SuiteTeardownTasks
+	CloseBrowser
+
+TestSetupTasks
+	SetFindElementTimeout		15
+	SetWaitAfterAction		0
+	ClearBrowserData
+
+TestTeardownTasks
+	RunKeywordIfTestFailed		GetPageScreenshot
+
+
+*** Test Cases ***
+Simple Demonstration
+	NavigateToUrl		${TEST_URL}
+	ClickElement		xpath=//input[@type='checkbox'][1]
+	WriteTextToField	name=textField          hello world!
+	ClickElement		linkText=test link
+	ClickPopupOk
+	ClickElement		id=myButton
+	ClickPopupCancel
+	RightClickOnElement	xpath=//button[text()[contains(.,'Right click')]]
+	ElementTextContains	id=my_text_div          text appears from
+	SwitchToFrame		myFrame
+	UnselectCheckbox	tagName=input
+	SwitchToDefaultContext
+	DoubleClickOnElement	partialLinkText=Double click
+	ElementTextEquals	id=my_second_text_div   another dynamic text element!
+	ClickElement		id=mySecondButton
+	ElementTextNotContains	id=my_text_div          text appears from
+	WriteTextToField	name=textField	        hello world for the second time!
+	RightClickOnElement	xpath=//button[text()[contains(.,'Right click')]]
+	ElementTextContains	id=forAll		Right click me! dynamic
+	Sleep	3s
+
+Simple Demonstration re-run
+	NavigateToUrl		${TEST_URL}
+	ClickElement		xpath=//input[@type='checkbox'][1]
+	WriteTextToField	name=textField          hello world!
+	ClickElement		linkText=test link
+	ClickPopupOk
+	ClickElement		id=myButton
+	ClickPopupCancel
+	RightClickOnElement	xpath=//button[text()[contains(.,'Right click')]]
+	ElementTextContains	id=my_text_div          text appears from
+	SwitchToFrame		myFrame
+	UnselectCheckbox	tagName=input
+	SwitchToDefaultContext
+	DoubleClickOnElement	partialLinkText=Double click
+	ElementTextEquals	id=my_second_text_div   another dynamic text element!
+	ClickElement		id=mySecondButton
+	ElementTextNotContains	id=my_text_div	        text appears from
+	WriteTextToField	name=textField	        hello world for the second time!
+	RightClickOnElement	xpath=//button[text()[contains(.,'Right click')]]
+	ElementTextContains	id=forAll               Right click me! dynamic
+	Sleep	3s
+
+
+
+

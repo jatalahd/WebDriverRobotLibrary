@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD><TITLE>Test page for WebDriverLibrary</TITLE></HEAD>
+<BODY onload='setContentToIframe()'>
+<SCRIPT>
+function myAlert() {
+  setTimeout(function(){alert("hi!")}, 2000);
+}
+function myPrompt() {
+  setTimeout(function(){prompt('I am a prompt box!','some text here')},3000);
+}
+function myText() {
+  setTimeout(function(){document.getElementById('my_text_div').innerHTML='dynamic text appears from nowhere'},3000);
+}
+function myTextDisappears() {
+  setTimeout(function(){document.getElementById('my_text_div').innerHTML=''},3000);
+}
+function mySecondText() {
+  setTimeout(function(){document.getElementById('my_second_text_div').innerHTML='another dynamic text element!'},3000);
+}
+function setContentToIframe() {
+  document.getElementById('myFrame').contentWindow.document.body.innerHTML = "<input type='checkbox' checked>checkbox inside iFrame</input>";
+}
+</SCRIPT>
+<H4>TEST PAGE FOR WEBDRIVERLIBRARY</H4>
+<div id='forAll'>
+<input type='checkbox'>test checkbox</input> <BR>
+<input name='textField' type='text'>test text field</input> <BR>
+<a href='#' onclick='myAlert()'>test link</a> <BR>
+<button id='myButton' onclick="myPrompt()">Click me!</button> <BR>
+<button oncontextmenu='myText()'>Right click me!</button> <BR>
+<div id="my_text_div"></div> <BR>
+<iframe id='myFrame' src='about:blank'></iframe> <BR>
+<a href='#' ondblclick='mySecondText()'>Double click me!</a> <BR>
+<div id="my_second_text_div"></div> <BR>
+<button id='mySecondButton' onclick="myTextDisappears()">Make text disappear</button> <BR>
+</div>
+</BODY>
+</HTML>
